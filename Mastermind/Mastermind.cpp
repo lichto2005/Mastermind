@@ -31,32 +31,22 @@ void Mastermind::printCode()
 Code Mastermind::humanGuess()
 {
 	Code returnCode;
-	int guess;
+	int digit;
 	bool isValid = false;
 	do
 	{
 		Code code;
-		std::cin >> guess;
-		if (guess < 0)
-		{
-			std::cout << "Invalid entry\n";
-			continue; //no negative
-		}
-		if (guess / 1000 > 5)
-		{
-			std::cout << "Invalid entry\n";
-			continue; //4 digit guesses
-		}
 		for (int i = 0; i < 4; i++)
 		{
-			int remainder = guess % 10;
-			if (remainder > 5)
+			std::cin >> digit;
+			if (digit > 5 || digit < 0)
 			{
-				std::cout << "Invalid entry\n";
+				std::cout << "Invalid Entry, reenter code.\n";
 				break;
 			}
-			code.secretCode.insert(code.secretCode.begin(), remainder);
-			guess /= 10;
+
+			code.secretCode.push_back(digit);
+
 			if (i == 3)
 			{
 				returnCode = code;
@@ -87,6 +77,7 @@ void Mastermind::playGame()
 {
 	code.initializeCode();
 	printCode();
+	std::cout << "Enter digits with white spaces inbetween or one per line.\n";
 	bool playerWin = false;
 	for (int i = 0; i < 10; i++)
 	{
