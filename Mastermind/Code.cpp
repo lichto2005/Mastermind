@@ -1,6 +1,5 @@
-#include <random>
 #include "Code.h"
-
+#include <time.h>
 
 Code::Code()
 {
@@ -13,11 +12,15 @@ Code::~Code()
 
 void Code::initializeCode()
 {
+	for(int i = 1; i < 5; i++) secretCode.push_back(i);
+	/*
+	srand(time(NULL));
 	for (int i = 0; i < 4; i++)
 	{
 		//add a random number in [0,5] to code vector
 		secretCode.push_back(rand() % 6);
 	}
+	*/
 }
 
 int Code::checkCorrect(Code guess)

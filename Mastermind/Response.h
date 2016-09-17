@@ -15,7 +15,7 @@ public:
 	void setCorrect(int correct);
 	int getIncorrect();
 	void setIncorrect(int incorrect);
-	const bool compareResponse(Response x, Response y);
+	bool compareResponse(Response x, Response y);
 	void printResponse();
 };
 

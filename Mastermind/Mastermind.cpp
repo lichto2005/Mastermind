@@ -8,6 +8,13 @@
 
 int main()
 {
+	//init mastermind object and start game
+	Mastermind mastermind;
+	mastermind.playGame();
+
+	//pause the program to prevent window from closing
+	std::cin.get();
+	std::cin.ignore();
     return 0;
 }
 
@@ -23,6 +30,7 @@ void Mastermind::printCode()
 
 Code Mastermind::humanGuess()
 {
+	Code returnCode;
 	int guess;
 	bool isValid = false;
 	do
@@ -49,10 +57,14 @@ Code Mastermind::humanGuess()
 			}
 			code.secretCode.insert(code.secretCode.begin(), remainder);
 			guess /= 10;
-			if (i == 3) isValid = true;
+			if (i == 3)
+			{
+				returnCode = code;
+				isValid = true;
+			}
 		}
 	} while (!isValid);
-	return code;
+	return returnCode;
 }
 
 Response Mastermind::getResponse(Code guess, Code secretCode)
@@ -60,7 +72,7 @@ Response Mastermind::getResponse(Code guess, Code secretCode)
 	Response response;
 	response.setCorrect(secretCode.checkCorrect(guess));
 	response.setIncorrect(secretCode.checkIncorrect(guess));
-	return Response();
+	return response;
 }
 
 bool Mastermind::isSolved(Response response)
@@ -74,6 +86,20 @@ bool Mastermind::isSolved(Response response)
 void Mastermind::playGame()
 {
 	code.initializeCode();
-	this->printCode();
+	printCode();
+	bool playerWin = false;
+	for (int i = 0; i < 10; i++)
+	{
+		Code guess = humanGuess();
+		Response response = getResponse(guess, code);
+		response.printResponse();
+		if (isSolved(response))
+		{
+			playerWin = true;
+			break;
+		}
+	}
 	
+	if (playerWin) std::cout << "Player wins!\n";
+	else std::cout << "Computer wins!\n";
 }
