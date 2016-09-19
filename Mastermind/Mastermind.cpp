@@ -11,7 +11,7 @@ int main()
     return 0;
 }
 
-void Mastermind::printCode()
+void const Mastermind::printCode()
 {
 	std::cout << "Secret Code: ";
 	for (int i = 0; i < code.secretCode.size(); i++)
@@ -21,7 +21,7 @@ void Mastermind::printCode()
 	std::cout << "\n";
 }
 
-Code Mastermind::humanGuess()
+Code const Mastermind::humanGuess()
 {
 	int guess;
 	bool isValid = false;
@@ -55,7 +55,7 @@ Code Mastermind::humanGuess()
 	return code;
 }
 
-Response Mastermind::getResponse(Code guess, Code secretCode)
+Response const Mastermind::getResponse(Code guess, Code secretCode)
 {
 	Response response;
 	response.setCorrect(secretCode.checkCorrect(guess));
@@ -63,7 +63,7 @@ Response Mastermind::getResponse(Code guess, Code secretCode)
 	return Response();
 }
 
-bool Mastermind::isSolved(Response response)
+bool const Mastermind::isSolved(Response response)
 {
 	Response correctResponse;
 	correctResponse.setCorrect(4);

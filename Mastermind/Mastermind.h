@@ -9,10 +9,10 @@ class Mastermind
 {
 private:
 	Code code;
-	void printCode();
-	Code humanGuess();
-	Response getResponse(Code guess, Code secretCode);
-	bool isSolved(Response response);
+	void const printCode();
+	Code const humanGuess();
+	Response const getResponse(Code guess, Code secretCode);
+	bool const isSolved(Response response);
 public:
 	void playGame();
 };
