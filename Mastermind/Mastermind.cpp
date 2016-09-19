@@ -8,6 +8,13 @@
 
 int main()
 {
+	//init mastermind object and start game
+	Mastermind mastermind;
+	mastermind.playGame();
+
+	//pause the program to prevent window from closing
+	std::cin.get();
+	std::cin.ignore();
     return 0;
 }
 
@@ -23,36 +30,31 @@ void const Mastermind::printCode()
 
 Code const Mastermind::humanGuess()
 {
-	int guess;
+	Code returnCode;
+	int digit;
 	bool isValid = false;
 	do
 	{
 		Code code;
-		std::cin >> guess;
-		if (guess < 0)
-		{
-			std::cout << "Invalid entry\n";
-			continue; //no negative
-		}
-		if (guess / 1000 > 5)
-		{
-			std::cout << "Invalid entry\n";
-			continue; //4 digit guesses
-		}
 		for (int i = 0; i < 4; i++)
 		{
-			int remainder = guess % 10;
-			if (remainder > 5)
+			std::cin >> digit;
+			if (digit > 5 || digit < 0)
 			{
-				std::cout << "Invalid entry\n";
+				std::cout << "Invalid Entry, reenter code.\n";
 				break;
 			}
-			code.secretCode.insert(code.secretCode.begin(), remainder);
-			guess /= 10;
-			if (i == 3) isValid = true;
+
+			code.secretCode.push_back(digit);
+
+			if (i == 3)
+			{
+				returnCode = code;
+				isValid = true;
+			}
 		}
 	} while (!isValid);
-	return code;
+	return returnCode;
 }
 
 Response const Mastermind::getResponse(Code guess, Code secretCode)
@@ -60,7 +62,7 @@ Response const Mastermind::getResponse(Code guess, Code secretCode)
 	Response response;
 	response.setCorrect(secretCode.checkCorrect(guess));
 	response.setIncorrect(secretCode.checkIncorrect(guess));
-	return Response();
+	return response;
 }
 
 bool const Mastermind::isSolved(Response response)
@@ -74,6 +76,21 @@ bool const Mastermind::isSolved(Response response)
 void Mastermind::playGame()
 {
 	code.initializeCode();
-	this->printCode();
+	printCode();
+	std::cout << "Enter digits with white spaces inbetween or one per line.\n";
+	bool playerWin = false;
+	for (int i = 0; i < 10; i++)
+	{
+		Code guess = humanGuess();
+		Response response = getResponse(guess, code);
+		response.printResponse();
+		if (isSolved(response))
+		{
+			playerWin = true;
+			break;
+		}
+	}
 	
+	if (playerWin) std::cout << "Player wins!\n";
+	else std::cout << "Computer wins!\n";
 }
