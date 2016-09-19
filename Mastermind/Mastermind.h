@@ -10,11 +10,11 @@ class Mastermind
 private:
 	Code code;
 	void const printCode();
-	Code const humanGuess();
-	Response const getResponse(Code guess, Code secretCode);
-	bool const isSolved(Response response);
+	Code const humanGuess(); // take a guess from player keyboard
+	Response const getResponse(Code& guess, Code& secretCode); // generate a response based on two codes
+	bool const isSolved(Response& response); // returns true if the player has guessed the code
 public:
-	void playGame();
+	void playGame(); // structure of game; generates code and takes in guesses in a loop
 };
 
 #endif

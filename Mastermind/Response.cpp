@@ -10,7 +10,7 @@ Response::~Response()
 {
 }
 
-int Response::getCorrect()
+int const Response::getCorrect()
 {
 	return correct;
 }
@@ -20,7 +20,7 @@ void Response::setCorrect(int correct)
 	this->correct = correct;
 }
 
-int Response::getIncorrect()
+int const Response::getIncorrect()
 {
 	return incorrect;
 }
@@ -30,12 +30,13 @@ void Response::setIncorrect(int incorrect)
 	this->incorrect = incorrect;
 }
 
-bool Response::compareResponse(Response x, Response y)
+bool const Response::compareResponse(const Response& response)
 {
-	return x.getCorrect() == y.getCorrect() && x.getIncorrect() == y.getIncorrect();
+	// if num correct and num incorrect digits are the same, response is the same; return true
+	return response.correct == this->correct && response.incorrect == this->incorrect;
 }
 
-void Response::printResponse()
+void const Response::printResponse()
 {
 	std::cout << "(" << correct << ", " << incorrect << ")\n";
 }

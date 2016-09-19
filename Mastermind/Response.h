@@ -4,6 +4,7 @@
 #ifndef RESPONSE_H
 #define RESPONSE_H
 
+// class to hold correct and incorrect parts of a guess
 class Response
 {
 private:
@@ -11,12 +12,12 @@ private:
 public:
 	Response();
 	~Response();
-	int getCorrect();
+	int const getCorrect();
 	void setCorrect(int correct);
-	int getIncorrect();
+	int const getIncorrect();
 	void setIncorrect(int incorrect);
-	bool compareResponse(Response x, Response y);
-	void printResponse();
+	bool const compareResponse(const Response& response); //compare a response to this response
+	void const printResponse();
 };
 
 #endif
