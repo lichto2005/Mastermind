@@ -1,4 +1,3 @@
-#pragma once
 #include <iostream>
 
 #ifndef RESPONSE_H

@@ -1,4 +1,3 @@
-#pragma once
 #include <vector>
 
 #ifndef CODE_H

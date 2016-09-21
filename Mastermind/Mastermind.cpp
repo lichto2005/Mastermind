@@ -1,22 +1,6 @@
-// Mastermind.cpp : Defines the entry point for the console application.
-//
-
 #include <iostream>
 #include "Mastermind.h"
 #include "Code.h"
-
-// entry point for program start
-int main()
-{
-	//init mastermind object and start game
-	Mastermind mastermind;
-	mastermind.playGame();
-
-	//pause the program to prevent window from closing
-	std::cin.get();
-	std::cin.ignore();
-    return 0;
-}
 
 void const Mastermind::printCode()
 {

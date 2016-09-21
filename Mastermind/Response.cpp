@@ -5,7 +5,6 @@ Response::Response()
 {
 }
 
-
 Response::~Response()
 {
 }
